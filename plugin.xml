@@ -38,7 +38,7 @@
         </config-file>
 
         <resource-file src="res/layout/overlay_layout.xml" target="res/layout/overlay_layout.xml" />
-        <resource-file src="res/values/styles.xml" target="res/values/styles.xml" />
+        <resource-file src="res/values/styles.xml" target="res/values/colors.xml" />
 
     </platform>
 

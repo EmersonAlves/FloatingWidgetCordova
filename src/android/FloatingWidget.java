@@ -1,5 +1,4 @@
-
-import android.widget.Toast;package br.com.floatingwidget;
+package br.com.floatingwidget;
 
 
 import org.apache.cordova.CallbackContext;
@@ -12,8 +11,6 @@ public class FloatingWidget extends CordovaPlugin  {
     @Override
     public boolean execute(String action, JSONArray args,
                            CallbackContext callbackContext) throws JSONException {
-
-        Toast.makeText(cordova.getActivity(),action,Toast.LENGTH_LONG);
 
         if (action.equals("YOUR_ACTION_NAME_PARAMETER")) {
             return true;

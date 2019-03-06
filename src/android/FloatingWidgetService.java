@@ -6,7 +6,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.andremion.counterfab.CounterFab;
+
+import br.com.teste.MainActivity;
 
 /**
  * Created by anupamchugh on 01/08/17.
@@ -75,7 +76,6 @@ public class FloatingWidgetService extends Service {
 
             counterFab = (CounterFab) mOverlayView.findViewById(R.id.fabHead);
             counterFab.setCount(1);
-
 
             final RelativeLayout layout = (RelativeLayout) mOverlayView.findViewById(R.id.layout);
             ViewTreeObserver vto = layout.getViewTreeObserver();
