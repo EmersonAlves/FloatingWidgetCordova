@@ -1,32 +1,10 @@
-/**
- * Constructor.
- *
- * @returns {FloatingWidget}
- */
-function FloatingWidget() {
-
-}
-
-
-FloatingWidget.prototype.open = function (successCallback, errorCallback, config) {
-
-    cordova.exec(
-        function (result) {
-            successCallback(result);
-        },
-        function (error) {
-            errorCallback(error);
-        },
-        'FloatingWidget',
-        'open',
-        config
-    );
+module.exports.open = function (successCallback, errorCallback) {
+    console.log(1);
+    cordova.exec(()=>{successCallback(1)},()=>{errorCallback(2)}, "FloatingWidget", "open", []);
 };
 
-//-------------------------------------------------------------------
-FloatingWidget.prototype.getPermission = function (successCallback, errorCallback) {
-    cordova.exec(successCallback, errorCallback, 'FloatingWidget', 'getPermission', []);
+module.exports.getPermission = function (successCallback, errorCallback) {
+    console.log(2);
+    cordova.exec(()=>{successCallback(1)},()=>{errorCallback(2)}, "FloatingWidget", "getPermission", []);
+
 }
-
-
-module.exports = FloatingWidget;
