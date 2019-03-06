@@ -18,12 +18,23 @@
             </feature>
         </config-file>
 
+        <framework src="com.android.support:appcompat-v7:25.3.1" />
+        <framework src="com.android.support:design:25.3.1" />
+        <framework src="com.android.support.constraint:constraint-layout:1.0.0-beta4" />
+        <framework src="com.github.andremion:counterfab:1.0.1" />
+
+
         <config-file target="AndroidManifest.xml" parent="/*">
             <!--<uses-permission android:name="android.permission.INTERNET" />-->
         </config-file>
 
         <source-file src="src/android/FloatingWidget.java" target-dir="src/br/com/floatingwidget" />
-       <!-- <source-file src="src/android/FloatingWidgetService.java" target-dir="src/br/com/floatingwidget" />-->
+        <source-file src="src/android/FloatingWidgetService.java" target-dir="src/br/com/floatingwidget" />
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="br.com.floatingwidget.FloatingWidgetService" />
+        </config-file>
+
     </platform>
 
 </plugin>
