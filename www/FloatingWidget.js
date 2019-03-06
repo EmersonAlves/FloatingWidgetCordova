@@ -28,5 +28,5 @@ FloatingWidget.prototype.getPermission = function (successCallback, errorCallbac
     cordova.exec(successCallback, errorCallback, 'FloatingWidget', 'getPermission', []);
 }
 
-if (!window.plugins.floatingWidget)
-    window.plugins.floatingWidget = new FloatingWidget();
+
+module.exports = FloatingWidget;
