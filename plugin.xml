@@ -22,7 +22,9 @@
         <framework src="com.android.support:design:25.3.1" />
         <framework src="com.android.support.constraint:constraint-layout:1.0.0-beta4" />
         <framework src="com.github.andremion:counterfab:1.0.1" />
-
+        <framework src="com.google.android.gms:play-services-plus:+" />
+        <framework src="com.google.android.gms:play-services-identity:+" />
+        <framework src="libs/google-play-services_lib" custom="true" />
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <!--<uses-permission android:name="android.permission.INTERNET" />-->
