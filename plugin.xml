@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="br.com.plugin.floatingwidget"
+    version="1.0.0">
+    <name>cordova-floating-widget</name>
+    <description>create floating widget native</description>
+    <license>null</license>
+
+    <js-module src="www/FloatingWidget.js" name="FloatingWidget">
+        <clobbers target="FloatingWidget" />
+    </js-module>
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="FloatingWidget" >
+                <param name="android-package" value="br.com.plugin.floatingwidget"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <!--<uses-permission android:name="android.permission.INTERNET" />-->
+        </config-file>
+
+        <source-file src="src/android/FloatingWidget.java" target-dir="src/br/com/floatingwidget" />
+       <!-- <source-file src="src/android/FloatingWidgetService.java" target-dir="src/br/com/floatingwidget" />-->
+    </platform>
+
+</plugin>

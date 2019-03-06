@@ -1,0 +1,17 @@
+{
+  "name": "br.com.plugin.floatingwidget",
+  "version": "1.0.0",
+  "description": "create floating widget native.",
+  "cordova": {
+    "id": "br.com.plugin.floatingwidget",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Emerson Alves",
+  "license": "null"
+}
