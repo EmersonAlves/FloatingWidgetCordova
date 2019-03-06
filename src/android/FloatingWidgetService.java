@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import com.andremion.counterfab.CounterFab;
 
 import br.com.teste.MainActivity;
+import br.com.teste.R;
 
 /**
  * Created by anupamchugh on 01/08/17.

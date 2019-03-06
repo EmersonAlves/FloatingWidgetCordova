@@ -22,11 +22,13 @@
         <framework src="com.android.support:design:25.3.1" />
         <framework src="com.android.support.constraint:constraint-layout:1.0.0-beta4" />
         <framework src="com.github.andremion:counterfab:1.0.1" />
+        <framework src="com.github.andremion:counterfab:x.y.z" />
 
         <config-file target="AndroidManifest.xml" parent="/*">
-            <!--<uses-permission android:name="android.permission.INTERNET" />-->
+            <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+            <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+            <uses-permission android:name="TASKS"/>
         </config-file>
 
         <source-file src="src/android/FloatingWidget.java" target-dir="src/br/com/floatingwidget" />
