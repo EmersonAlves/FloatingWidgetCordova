@@ -1,21 +1,20 @@
-# Example Cordova plugin for Android
-When you realize, you are creating plugin to call one function on the android side it's ...
-
+# Example plugin floating widget for Android
+I found some difficulties working with widget using cord. So decide to create your own plugin, making it easy to use and customize 'Floating Widget'
 ## How to install
-Go to your cordova project and just copy paste the plugin there. Then run (in your project folder):
+To install copy to the line below:
 
 ```
-cordova plugin add ./cordova-example-plugin
+cordova plugin add https://github.com/EmersonAlves/FloatingWidgetCordova
 ```
 
-You can have the plugin wherever you want, it doesn't have to be in you project path, but remember that may come time when someone else will be pulling your project from repository and he will have your plugin as a dependency.
-
-## Call it
-Then in javascript:
+## Get Permission
+to request permission to use the floating widget function
 ```
-cordova.exec(function(success) {},                              //success callback
-             function(error) {},                                //error callback
-             "Example",                                         //class name
-             "YOUR_ACTION_NAME_PARAMETER",                      //action name 
-             ["Dog", "Pig", 42, false]);                        //args array
+ FloatingWidget.getPermission(success,fail);
+```
+
+## Open floating widget
+to request permission to use the floating widget function
+```
+ FloatingWidget.open(success,fail,config);
 ```
