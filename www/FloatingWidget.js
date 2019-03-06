@@ -1,4 +1,3 @@
-var exec = cordova.require("cordova/exec");
 
 /**
  * Constructor.
@@ -9,9 +8,10 @@ function FloatingWidget() {
 
 }
 
+
 FloatingWidget.prototype.open = function (successCallback, errorCallback, config) {
 
-    exec(
+    cordova.exec(
         function(result) {
             successCallback(result);
         },
@@ -26,8 +26,7 @@ FloatingWidget.prototype.open = function (successCallback, errorCallback, config
 
 //-------------------------------------------------------------------
 FloatingWidget.prototype.getPermission = function (successCallback, errorCallback) {
-    exec(successCallback, errorCallback, 'FloatingWidget', 'getPermission', []);
-};
+    cordova.exec(successCallback, errorCallback, 'FloatingWidget', 'getPermission', []);
+}
 
-var floatingWidget = new FloatingWidget();
-module.exports = floatingWidget;
+module.exports = {FloatingWidget : FloatingWidget};
