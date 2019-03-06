@@ -14,7 +14,7 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="FloatingWidget" >
-                <param name="android-package" value="br.com.floatingwidget"/>
+                <param name="android-package" value="br.com.floatingwidget.FloatingWidget"/>
             </feature>
         </config-file>
 
