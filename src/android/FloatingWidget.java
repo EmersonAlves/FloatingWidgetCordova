@@ -1,6 +1,6 @@
-package br.com.floatingwidget;
 
-import android.widget.Toast;
+import android.widget.Toast;package br.com.floatingwidget;
+
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;

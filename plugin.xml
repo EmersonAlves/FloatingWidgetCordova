@@ -35,6 +35,9 @@
             <service android:name="br.com.floatingwidget.FloatingWidgetService" />
         </config-file>
 
+        <source-file src="res/layout/overlay_layout.xml" target-dir="res/layout/overlay_layout.xml" />
+        <source-file src="res/values/styles.xml" target-dir="res/values/styles.xml" />
+
     </platform>
 
 </plugin>
