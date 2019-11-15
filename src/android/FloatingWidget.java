@@ -50,16 +50,14 @@ public class FloatingWidget extends CordovaPlugin  {
     }
 
      private void askForSystemOverlayPermission() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(cordova.getContext())) {
 
                 //If the draw over permission is not available to open the settings screen
                 //to grant the permission.
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse("package:" + getPackageName()));
-                startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
+                        Uri.parse("package:" + cordova.getContext().getPackageName()));
+                cordova.getActivity().startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
             }
     }
-
-
 
 }
