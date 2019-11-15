@@ -36,9 +36,11 @@ public class FloatingWidgetService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        setTheme(R.style.AppTheme);
+        setTheme(getApplication().getResources().getIdentifier("AppTheme", "style", getPackageName()));
 
-        mOverlayView = LayoutInflater.from(this).inflate(R.layout.overlay_layout, null);
+        mOverlayView = LayoutInflater.from(this).inflate(
+                getApplication().getResources().getIdentifier("overlay_layout", "layout", getPackageName())
+                , null);
 
         int LAYOUT_FLAG;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -64,7 +66,7 @@ public class FloatingWidgetService extends Service {
         final Point size = new Point();
         display.getSize(size);
 
-        final RelativeLayout layout = (RelativeLayout) mOverlayView.findViewById(R.id.relativeLayoutParent);
+        final RelativeLayout layout = (RelativeLayout) mOverlayView.findViewById(getApplication().getResources().getIdentifier("relativeLayoutParent","id",getPackageName()));
         ViewTreeObserver vto = layout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -78,7 +80,7 @@ public class FloatingWidgetService extends Service {
             }
         });
 
-        CircleImageView imageBtn = mOverlayView.findViewById(R.id.logoFocus);
+        CircleImageView imageBtn = mOverlayView.findViewById(getApplication().getResources().getIdentifier("logoFocus","id",getPackageName()));
 
         imageBtn.setOnTouchListener(new View.OnTouchListener() {
             private int initialX;
