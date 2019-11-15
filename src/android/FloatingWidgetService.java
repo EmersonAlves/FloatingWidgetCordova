@@ -36,7 +36,7 @@ public class FloatingWidgetService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        setTheme(getApplication().getResources().getIdentifier("AppTheme", "style", getPackageName()));
+       // setTheme(getApplication().getResources().getIdentifier("AppTheme", "style", getPackageName()));
 
         mOverlayView = LayoutInflater.from(this).inflate(
                 getApplication().getResources().getIdentifier("overlay_layout", "layout", getPackageName())
