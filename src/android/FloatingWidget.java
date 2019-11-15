@@ -30,6 +30,11 @@ public class FloatingWidget extends CordovaPlugin  {
             return true;
         }
 
+        if (action.equals("close")) {
+            closeFloatingWidget();
+            return true;
+        }
+
         return false; // Returning false results in a "MethodNotFound" error.
     }
 
@@ -58,6 +63,12 @@ public class FloatingWidget extends CordovaPlugin  {
                         Uri.parse("package:" + cordova.getContext().getPackageName()));
                 cordova.getActivity().startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
             }
+        }
+
+
+    private void closeFloatingWidget() {
+        Intent lintent = new Intent(cordova.getContext(), FloatingWidgetService.class);
+        cordova.getContext().stopService(lintent);
     }
 
 }
