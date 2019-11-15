@@ -1,5 +1,5 @@
 {
-  "name": "br.com.fabrica704.widgetfloat",
+  "name": "cordova-floating-widget",
   "version": "1.0.0",
   "description": "create floating widget native.",
   "cordova": {
