@@ -1,4 +1,4 @@
-package br.com.floatingwidget;
+package br.com.fabrica704.widgetfloat;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,29 +36,28 @@ public class FloatingWidget extends CordovaPlugin  {
     private void openFloatingWidget(){
         Activity context = cordova.getActivity();
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || Settings.canDrawOverlays(context)) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             context.startService(new Intent(cordova.getActivity(), FloatingWidgetService.class));
+            // finish();
+        } else if (Settings.canDrawOverlays(cordova.getActivity())) {
+            context.startService(new Intent(cordova.getActivity(), FloatingWidgetService.class));
+            // finish();
         } else {
-            errorToast();
+            askForSystemOverlayPermission();
+            Toast.makeText(cordova.getActivity(), "You need System Alert Window Permission to do this", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private void errorToast() {
-        Toast.makeText(cordova.getActivity(), "Draw over other app permission not available. Can't start the application without the permission.", Toast.LENGTH_LONG).show();
-    }
+     private void askForSystemOverlayPermission() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
 
-    private void askForSystemOverlayPermission() {
-        Activity context = cordova.getActivity();
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
-
-            //If the draw over permission is not available open the settings screen
-            //to grant the permission.
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:" + context.getPackageName()));
-            context.startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
-        }
+                //If the draw over permission is not available to open the settings screen
+                //to grant the permission.
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, DRAW_OVER_OTHER_APP_PERMISSION);
+            }
     }
 
 

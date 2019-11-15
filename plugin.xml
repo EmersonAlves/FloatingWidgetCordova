@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="br.com.plugin.floatingwidget"
+    id="br.com.fabrica704.widgetfloat"
     version="1.0.0">
     <name>cordova-floating-widget</name>
     <description>create floating widget native</description>
@@ -14,32 +14,27 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="FloatingWidget" >
-                <param name="android-package" value="br.com.floatingwidget.FloatingWidget"/>
+                <param name="android-package" value="br.com.fabrica704.widgetfloat.FloatingWidget"/>
             </feature>
         </config-file>
 
-        <framework src="com.android.support:appcompat-v7:25.3.1" />
-        <framework src="com.android.support:design:25.3.1" />
-        <framework src="com.android.support.constraint:constraint-layout:1.0.0-beta4" />
-        <framework src="com.github.andremion:counterfab:1.0.1" />
-        <framework src="com.github.andremion:counterfab:x.y.z" />
+        <framework src="com.android.support:support-annotations:28.0.0" />
+        <framework src="de.hdodenhof:circleimageview:3.0.1" />
 
         <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-sdk android:minSdkVersion="19" android:targetSdkVersion="25" />
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-            <uses-permission android:name="TASKS"/>
+            <uses-permission android:name="android.permission.REORDER_TASKS" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
         </config-file>
 
         <source-file src="src/android/FloatingWidget.java" target-dir="src/br/com/floatingwidget" />
         <source-file src="src/android/FloatingWidgetService.java" target-dir="src/br/com/floatingwidget" />
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <service android:name="br.com.floatingwidget.FloatingWidgetService" />
+            <service android:name="br.com.fabrica704.widgetfloat.FloatingWidgetService" />
         </config-file>
 
         <resource-file src="res/layout/overlay_layout.xml" target="res/layout/overlay_layout.xml" />
-        <resource-file src="res/values/styles.xml" target="res/values/colors.xml" />
 
     </platform>
 

@@ -1,9 +1,9 @@
 {
-  "name": "br.com.plugin.floatingwidget",
+  "name": "br.com.fabrica704.widgetfloat",
   "version": "1.0.0",
   "description": "create floating widget native.",
   "cordova": {
-    "id": "br.com.plugin.floatingwidget",
+    "id": "br.com.fabrica704.widgetfloat",
     "platforms": [
       "android"
     ]
