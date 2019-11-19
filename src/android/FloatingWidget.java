@@ -22,6 +22,7 @@ public class FloatingWidget extends CordovaPlugin  {
 
         if (action.equals("open")) {
             openFloatingWidget();
+            openServiceLocation(args.getJSONObject(0));
             return true;
         }
 
@@ -71,4 +72,17 @@ public class FloatingWidget extends CordovaPlugin  {
         cordova.getContext().stopService(lintent);
     }
 
+
+    private void openServiceLocation(JSONObject object) {
+        Intent intent = new Intent(cordova.getContext(), LocationService.class);
+        try {
+            intent.putExtra("url", object.getString("url"));
+            intent.putExtra("driverId", object.getInt("driverId"));
+            intent.putExtra("userId", object.getInt("userId"));
+            intent.putExtra("token", object.getString("token"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        cordova.getContext().startService(intent);
+    }
 }

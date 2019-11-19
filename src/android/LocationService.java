@@ -25,6 +25,10 @@ public class LocationService extends Service {
     private LocationListener listener;
     private LocationManager locationManager;
 
+    private int driverId;
+    private int userId;
+    private String token;
+
 
     @Nullable
     @Override
@@ -80,8 +84,8 @@ public class LocationService extends Service {
     public void sendLocation(Location location) throws JSONException {
         Map<String, String> headers = new HashMap<>();
 
-        headers.put("token", "$2y$10$tmoh7o.UCwjyo9KnQgbplOBdSxGI9i8uU9bRq9n3221sU4hGCr2Ka");
-        headers.put("userid", "652");
+        headers.put("token", token);
+        headers.put("userid", ""+userId);
 
         JSONObject objectBase = new JSONObject();
         JSONArray objectArray = new JSONArray();
@@ -89,12 +93,23 @@ public class LocationService extends Service {
 
         data.put("latitude", location.getLatitude());
         data.put("longitude", location.getLongitude());
-        data.put("driverId",110);
+        data.put("driverId", driverId);
 
         objectArray.put(data);
 
         objectBase.put("stdObject", objectArray);
 
         RequestApi.sendPost(this, "Location/Insert", objectBase, headers);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        driverId = intent.getExtras().getInt("driverId");
+        userId = intent.getExtras().getInt("userId");
+        token = intent.getExtras().getString("token");
+        RequestApi.HOST = intent.getExtras().getString("url");
+
+        return super.onStartCommand(intent, flags, startId);
     }
 }

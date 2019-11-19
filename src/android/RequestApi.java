@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class RequestApi {
 
-    private final static String HOST = "https://apiteste.taxireturn.com.br/";
+    public static String HOST = "";
 
     public static void sendPost(Context context, String path, JSONObject data, Map<String, String> headers) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
