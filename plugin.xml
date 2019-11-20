@@ -21,6 +21,8 @@
         <framework src="de.hdodenhof:circleimageview:3.0.1" />
         <framework src="com.android.volley:volley:1.1.1" />
         <framework src="com.android.support:support-compat:27.0.0" />
+        <framework src="com.google.android.gms:play-services-location:16.0.0" />
+        <framework src="com.karumi:dexter:5.0.0" />
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -29,7 +31,8 @@
             <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
             <uses-permission android:name="android.permission.INTERNET"/>
-            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         </config-file>
 
         <source-file src="src/android/FloatingWidget.java" target-dir="src/br/com/fabrica704/widgetfloat" />
@@ -39,7 +42,7 @@
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <service android:name="br.com.fabrica704.widgetfloat.FloatingWidgetService" />
-            <service android:name="br.com.fabrica704.widgetfloat.LocationService" />
+            <receiver android:name="br.com.fabrica704.widgetfloat.LocationService" />
         </config-file>
 
         <resource-file src="res/layout/overlay_layout.xml" target="res/layout/overlay_layout.xml" />

@@ -2,6 +2,7 @@ package br.com.fabrica704.widgetfloat;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -29,6 +30,8 @@ public class RequestApi {
         final int type = Request.Method.POST;
 
         final String requestBody = data.toString();
+
+        Toast.makeText(context,requestBody,Toast.LENGTH_LONG).show();
 
         StringRequest stringRequest = RequestApi.getStringRequest(type, url, requestBody, headers);
 
