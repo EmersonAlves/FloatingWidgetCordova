@@ -14,6 +14,12 @@ import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -27,6 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.annotation.Nullable;
+
 public class FloatingWidget extends CordovaPlugin {
 
     private static final int DRAW_OVER_OTHER_APP_PERMISSION = 4321;
@@ -39,6 +47,7 @@ public class FloatingWidget extends CordovaPlugin {
 
         if (action.equals("open")) {
             openFloatingWidget();
+            startObserver(args.getJSONObject(0));
             //getPermissionLocationService(args.getJSONObject(0));
             return true;
         }
@@ -154,5 +163,28 @@ public class FloatingWidget extends CordovaPlugin {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(10000);
+    }
+
+    private void startObserver(JSONObject object) throws JSONException {
+        FirebaseApp firebaseApp = FirebaseApp.initializeApp(cordova.getContext());
+        FirebaseFirestore db = FirebaseFirestore.getInstance(firebaseApp);
+        CollectionReference citiesRef = db.collection("trips");
+        citiesRef.whereArrayContains("callingDriver", object.getInt("driverId"));
+        citiesRef.whereEqualTo("driverId", object.getInt("driverId"));
+        citiesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (e != null)
+                    return;
+
+                if (queryDocumentSnapshots.size() > 0) {
+                    Intent launchIntent = cordova.getActivity().getPackageManager()
+                            .getLaunchIntentForPackage(cordova.getActivity().getPackageName());
+                    if (launchIntent != null) {
+                        cordova.getActivity().startActivity(launchIntent);
+                    }
+                }
+            }
+        });
     }
 }

@@ -23,6 +23,7 @@
         <framework src="com.android.support:support-compat:27.0.0" />
         <framework src="com.google.android.gms:play-services-location:16.0.0" />
         <framework src="com.karumi:dexter:5.0.0" />
+        <framework src="com.google.firebase:firebase-firestore:19.0.0" />
 
         <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
