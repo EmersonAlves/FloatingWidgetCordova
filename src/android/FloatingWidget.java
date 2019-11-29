@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -16,6 +17,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -48,7 +50,7 @@ public class FloatingWidget extends CordovaPlugin {
         if (action.equals("open")) {
             openFloatingWidget();
             startObserver(args.getJSONObject(0));
-            //getPermissionLocationService(args.getJSONObject(0));
+           /// getPermissionLocationService(args.getJSONObject(0));
             return true;
         }
 
@@ -147,14 +149,14 @@ public class FloatingWidget extends CordovaPlugin {
     private PendingIntent getPendingIntent(JSONObject object) {
         Intent intent = new Intent(cordova.getContext(), LocationService.class);
         intent.setAction(LocationService.ACTION_PROCESS_UPDATE);
-        try {
+       /* try {
             intent.putExtra("url", object.getString("url"));
             intent.putExtra("driverId", object.getInt("driverId"));
             intent.putExtra("userId", object.getInt("userId"));
             intent.putExtra("token", object.getString("token"));
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
 
         return PendingIntent.getBroadcast(cordova.getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
@@ -169,22 +171,35 @@ public class FloatingWidget extends CordovaPlugin {
         FirebaseApp firebaseApp = FirebaseApp.initializeApp(cordova.getContext());
         FirebaseFirestore db = FirebaseFirestore.getInstance(firebaseApp);
         CollectionReference citiesRef = db.collection("trips");
-        citiesRef.whereArrayContains("callingDriver", object.getInt("driverId"));
-        citiesRef.whereEqualTo("driverId", object.getInt("driverId"));
-        citiesRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                if (e != null)
-                    return;
+        citiesRef
+                .whereArrayContains("callingDriver", object.getString("driverId"))
+                .whereEqualTo("driverId", null)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot snapshots, @Nullable FirebaseFirestoreException e) {
+                        if (e != null)
+                            return;
 
-                if (queryDocumentSnapshots.size() > 0) {
-                    Intent launchIntent = cordova.getActivity().getPackageManager()
-                            .getLaunchIntentForPackage(cordova.getActivity().getPackageName());
-                    if (launchIntent != null) {
-                        cordova.getActivity().startActivity(launchIntent);
+                        Log.d("Firestore", "test");
+
+                        for (DocumentChange dc : snapshots.getDocumentChanges()) {
+                            switch (dc.getType()) {
+                                case ADDED:
+                                case MODIFIED: {
+
+                                    Log.d("Firestore", "Dados: " + dc.getDocument().getData().toString());
+                                    Intent launchIntent = cordova.getActivity().getPackageManager()
+                                            .getLaunchIntentForPackage(cordova.getActivity().getPackageName());
+                                    if (launchIntent != null) {
+                                        cordova.getActivity().startActivity(launchIntent);
+                                    }
+                                }
+                                case REMOVED:
+                                    Log.d("Firestore", "Dados: " + dc.getDocument().getData());
+                                    break;
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 }
